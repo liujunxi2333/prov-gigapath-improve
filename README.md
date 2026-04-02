@@ -102,8 +102,7 @@ python scripts/hybrid_v9_tile_slide.py \
 
 默认输出目录：`<仓库根>/runs/<切片基名>/v9_run/`，包含 `embedding.pt`、`perf.json`、`run_meta.json`；若 `--monitor` 另有 `gpu_curve.png`、`monitor_timeseries.npz`。
 
-### 批量目录（与 `verify_outv9_vs_baseline.py` 中 v9 部分一致）
-
+### 批量目录
 原脚本 `11111ovarian/compare_test/outv9_compare/verify_outv9_vs_baseline.py` 里，对每张切片实际只做 **`run_v9_pipeline(...)`**（即 `_ensure_v9_embedding`）。本仓库用 `scripts/batch_embed_v9.py` 实现**同一调用链**，但**不包含**与 baseline 的向量对比、cosine、加速比报表等。
 
 ```bash
@@ -122,6 +121,7 @@ python scripts/batch_embed_v9.py \
 - 批量汇总：`--output_root/batch_manifest.json`（每张的状态与 `report` 摘要）。
 
 ## SLURM 集群
+本项目包含在你的hpc（基于slurm平台）的提交脚本，可根据自己需要修改
 
 编辑 `submit_outv9_hybrid.sh` 中的 `#SBATCH` 分区、`module`、`conda` 路径，然后：
 
