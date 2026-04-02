@@ -3,7 +3,7 @@
 本仓库是基于原项目prov-gigapath的升级版，旨在更快的处理大量的病理切片。
 本项目相较于原项目baseline，对单张切片从tif处理成768维向量速度快了78%左右
 <img width="1600" height="720" alt="speedup_total_bar" src="https://github.com/user-attachments/assets/3b6ea3b6-9729-4a55-b2e7-654799a8289e" />
-如图为随机抽取五张切片的提升幅度
+如图为随机抽取五张切片的提升幅度，均有4-5倍左右的性能提升
 
 ## 功能概要
 
