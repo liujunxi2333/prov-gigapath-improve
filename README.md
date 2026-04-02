@@ -1,6 +1,6 @@
 # GigaPath Improve — WSI v9 Hybrid（GPU 加速扫描 + 双卡 Tile + Slide）
 
-本仓库从原项目抽取 **outv9** 管线（`scripts/hybrid_v9_tile_slide.py`）及其 **Python 依赖代码**，便于独立克隆、配置环境、在集群或本地复现部署，并可直接推送到 GitHub。
+本仓库是基于原项目prov-gigapath的升级版，旨在更快的处理大量的病理切片。
 本项目相较于原项目baseline，对单张切片从tif处理成768维向量速度快了78%左右
 <img width="1600" height="720" alt="speedup_total_bar" src="https://github.com/user-attachments/assets/3b6ea3b6-9729-4a55-b2e7-654799a8289e" />
 如图为随机抽取五张切片的提升幅度
