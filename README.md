@@ -1,6 +1,9 @@
 # GigaPath Improve — WSI v9 Hybrid（GPU 加速扫描 + 双卡 Tile + Slide）
 
 本仓库从原项目抽取 **outv9** 管线（`scripts/hybrid_v9_tile_slide.py`）及其 **Python 依赖代码**，便于独立克隆、配置环境、在集群或本地复现部署，并可直接推送到 GitHub。
+本项目相较于原项目baseline，对单张切片从tif处理成768维向量速度快了78%左右
+<img width="1600" height="720" alt="speedup_total_bar" src="https://github.com/user-attachments/assets/3b6ea3b6-9729-4a55-b2e7-654799a8289e" />
+如图为随机抽取五张切片的提升幅度
 
 ## 功能概要
 
@@ -55,7 +58,8 @@ gigapath-improve/
 - **CUDA** 与 **PyTorch** 版本需匹配（见 `requirements.txt` 中的 `torch==2.10.0` 等；若本机 CUDA 不同，请从 [PyTorch 官网](https://pytorch.org/get-started/locally/) 安装对应 wheel，再按需安装其余依赖）
 - **OpenSlide**：`openslide-python` + 系统级 libopenslide（Linux 常见包名 `openslide-tools` / `libopenslide-dev`）
 - **可选**：`pynvml` / `nvidia-ml-py`（用于 `--monitor`）
-
+本项目需要两个预训练的模型，获取方式参见
+https://huggingface.co/prov-gigapath/prov-gigapath
 ## 安装步骤
 
 ```bash
