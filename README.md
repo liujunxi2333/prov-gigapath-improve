@@ -136,11 +136,6 @@ sbatch submit_outv9_hybrid.sh
 - **`gigapath/`**：来自原工程 `prov-gigapath-main/gigapath`，用于 `import gigapath.slide_encoder`。
 - **`parallel_improve2/wsi_embed_benchmark.py`**：来自原工程 `11111ovarian/parallel_improve2/`，在原有 baseline/stream 扫描等基础上，**增加了 v9 的 GPU 扫描实现**（`compute_tissue_coords_parallel_strips_gpu` 等）。
 
-## 上传到 GitHub
-
-1. 不要提交大文件：`weights/*.pt`、`weights/*.pth`、`runs/` 已在 `.gitignore`。
-2. `requirements.txt` 含完整 pip 冻结；若推送后他人安装失败，请根据其 CUDA 版本单独安装 `torch/torchvision` 后再 `pip install -r requirements.txt --no-deps` 或分段安装。
-
 ## 许可证
 
 原 GigaPath 与相关权重版权归各自所有者；本仓库内**自写脚本与说明**可按项目需要单独选择许可证（如 MIT）。若需对外发布，请确认上游模型与代码的许可条款。
