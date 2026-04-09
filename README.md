@@ -1,6 +1,11 @@
-# GigaPath Improve — WSI v9 Hybrid（GPU 加速扫描 + 双卡 Tile + Slide）
+# GigaPath Improve
 
-本仓库从原项目抽取 **outv9** 管线及其 **Python 依赖代码**，便于独立克隆、配置环境、在集群或本地复现部署，并可直接推送到 GitHub。
+本仓库是https://github.com/prov-gigapath/prov-gigapath项目的提升版本
+## 较原项目对单张切片从图片转换成张量的速度提升了4-5倍
+<img width="1600" height="720" alt="speedup_total_bar" src="https://github.com/user-attachments/assets/a6f8020b-f78e-4245-a8f2-62bc8fdcfea6" />
+
+增加了ov_png_folder_to_tif_v2.py脚本，实现了gpu加速对png图片转换成level0+level1层级的tif，具体详见ov_png_folder_to_tif_v2.md
+--update 2026.4.9
 
 ## 功能概要
 
