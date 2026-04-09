@@ -1,6 +1,7 @@
 # GigaPath Improve — WSI v9 Hybrid（GPU 加速扫描 + 双卡 Tile + Slide）
 
-本仓库为[gigapath](https://github.com/prov-gigapath/prov-gigapath)项目的加速优化+整合版，能够以4~5倍的速度（相较于原项目代码），将wsi/tif等切片处理成768维tensor，供后续构建分类模型等使用
+本仓库为[gigapath](https://github.com/prov-gigapath/prov-gigapath)项目的加速优化+整合版
+## 能够以4~5倍的速度（相较于原项目代码），将wsi/tif等切片处理成768维tensor，供后续构建分类模型等使用
 以下为数据集中随机抽取五张切片的加速效果
 <img width="1600" height="720" alt="speedup_total_bar" src="https://github.com/user-attachments/assets/f8a82c75-ddac-4c66-a991-3a92e01f6f72" />
 本项目针对部署在有两张l40s显卡并行的条件下，如果有其它部署需要，可以联系作者发布新的针对优化的版本
