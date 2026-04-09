@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+.venv/
+
+# 运行产物
+runs/
+hpc/gpu_monitor_batch50/
+hpc/slurm_logs/*.out
+hpc/slurm_logs/*.err
+*.pt
+*.pth
+*.bin
+!weights/.gitkeep
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# 系统
+.DS_Store

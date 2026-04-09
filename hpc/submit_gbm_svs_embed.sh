@@ -1,0 +1,70 @@
+#!/bin/bash
+# GBM 目录下 .svs/.tif 双卡 embed_dir，张量按切片名保存到 output_root/<stem>/embedding.pt
+#
+# 提交: sbatch /public/home/wang/liujx/prov-gigapath-improve/hpc/submit_gbm_svs_embed.sh
+#
+#SBATCH --job-name=gbm_svs_embed
+#SBATCH --output=/public/home/wang/liujx/prov-gigapath-improve/hpc/slurm_logs/gbm_svs_embed_%j.out
+#SBATCH --error=/public/home/wang/liujx/prov-gigapath-improve/hpc/slurm_logs/gbm_svs_embed_%j.err
+#SBATCH --partition=gpu2-l40s
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --gres=gpu:tesla:2
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=120G
+#SBATCH --time=200:00:00
+
+set -euo pipefail
+
+module load gcc-toolset/12
+source /public/home/wang/liujx/miniconda3/bin/activate gigapath
+
+ROOT="${GIGAPATH_IMPROVE_ROOT:-/public/home/wang/liujx/prov-gigapath-improve}"
+export PYTHONPATH="${ROOT}:${ROOT}/parallel_improve2:${PYTHONPATH:-}"
+
+export TILE_WEIGHT="${TILE_WEIGHT:-/public/home/wang/liujx/pytorch_model.bin}"
+export SLIDE_WEIGHT="${SLIDE_WEIGHT:-/public/home/wang/liujx/slide_encoder.pth}"
+
+export OMP_NUM_THREADS=4
+export MKL_NUM_THREADS=4
+export OPENBLAS_NUM_THREADS=4
+export NUMEXPR_NUM_THREADS=4
+export VECLIB_MAXIMUM_THREADS=4
+
+TIF_DIR="${GBM_TIF_DIR:-/public/home/wang/likf/share_group_folder_wang/pathology/GBM}"
+OUT_ROOT="${GBM_OUTPUT_ROOT:-/public/home/wang/liujx/prov-gigapath-improve/output}"
+SEED="${SEED:-42}"
+BATCH_SIZE="${BATCH_SIZE:-128}"
+NUM_WORKERS="${NUM_WORKERS:-4}"
+SCAN_CPU_WORKERS="${SCAN_CPU_WORKERS:--1}"
+SCAN_UNIQUE_ON_GPU="${SCAN_UNIQUE_ON_GPU:-1}"
+MONITOR_INTERVAL="${MONITOR_INTERVAL:-0.1}"
+
+mkdir -p "${OUT_ROOT}" "${ROOT}/hpc/slurm_logs"
+
+echo "ROOT=${ROOT}"
+echo "TIF_DIR=${TIF_DIR}"
+echo "OUT_ROOT=${OUT_ROOT}"
+nvidia-smi -L 2>/dev/null || true
+
+if [[ ! -d "${TIF_DIR}" ]]; then
+  echo "目录不存在: ${TIF_DIR}" >&2
+  exit 1
+fi
+
+python "${ROOT}/main_batch.py" embed_dir \
+  --tif_dir "${TIF_DIR}" \
+  --output_root "${OUT_ROOT}" \
+  --tile_weight "${TILE_WEIGHT}" \
+  --slide_weight "${SLIDE_WEIGHT}" \
+  --seed "${SEED}" \
+  --batch_size "${BATCH_SIZE}" \
+  --num_workers "${NUM_WORKERS}" \
+  --scan_cpu_workers "${SCAN_CPU_WORKERS}" \
+  --scan_unique_on_gpu "${SCAN_UNIQUE_ON_GPU}" \
+  --flat_output \
+  --monitor \
+  --monitor_interval "${MONITOR_INTERVAL}"
+
+echo "[done] summary: ${OUT_ROOT}/summary.json"
+echo "[done] 每张切片: ${OUT_ROOT}/<切片名>/embedding.pt"
