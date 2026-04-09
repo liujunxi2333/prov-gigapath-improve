@@ -36,34 +36,6 @@
 
 - 原 `wsi_embed_benchmark` 的 baseline vs stream **compare / ablation**（`--slide_list` 文本，每行一张路径）。
 
-## 目录结构
-
-```
-gigapath-improve/
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── main.py                    # 兼容入口：转发 single / v9 / batch / tif_dual / benchmark
-├── main_single.py             # 单张 WSI：坐标二分 v9（推荐）
-├── main_batch.py              # 批量：embed_dir | benchmark
-├── submit_outv9_hybrid.sh     # SLURM 示例 → 调用 main_single.py
-├── gigapath/                  # slide_encoder、torchscale 等
-├── parallel_improve2/
-│   ├── wsi_embed/             # 按功能拆分的包（coords、datasets、pipeline_* …）
-│   └── wsi_embed_benchmark.py # 兼容 shim：from wsi_embed import …
-├── scripts/
-│   ├── hybrid_v9_tile_slide.py  # 薄封装，内部调用 wsi_embed.pipeline_v9
-│   └── batch_embed_v9.py        # 批量单张 v9（逐张 run_v9_pipeline，无「按大小分两队列」逻辑）
-├── hpc/
-│   ├── slurm_logs/            # SLURM 标准输出目录（含 .gitkeep）
-│   ├── submit_verify_single_wsi_gigapath.sh   # 集群：gigapath 环境 + 单张自检
-│   ├── submit_batch_gpu_curve_50.sh           # 集群：50 张 staging + embed_dir + monitor
-│   ├── build_finaltif_sample_50.sh            # 从 finaltif 抽 50 张 → CSV + tif_staging_50 软链
-│   └── gpu_monitor_batch50/   # 运行 build 脚本后生成（已在 .gitignore）
-├── weights/
-└── runs/                      # 默认输出（gitignore）
-```
-
 ## 硬件与显存建议
 
 | 项目 | 建议 |
