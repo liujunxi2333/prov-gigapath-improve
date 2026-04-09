@@ -1,6 +1,6 @@
 # GigaPath Improve
 
-本仓库是https://github.com/prov-gigapath/prov-gigapath项目的提升版本
+本仓库是 https://github.com/prov-gigapath/prov-gigapath 项目的提升版本
 ## 较原项目对单张切片从图片转换成张量的速度提升了4-5倍
 <img width="1600" height="720" alt="speedup_total_bar" src="https://github.com/user-attachments/assets/a6f8020b-f78e-4245-a8f2-62bc8fdcfea6" />
 
