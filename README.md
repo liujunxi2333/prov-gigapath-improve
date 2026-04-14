@@ -188,11 +188,6 @@ sbatch hpc/submit_batch_gpu_curve_50.sh
 - **`gigapath/`**：来自原工程 `prov-gigapath-main/gigapath`，用于 `import gigapath.slide_encoder`。
 - **`parallel_improve2/wsi_embed/`**：由原 `wsi_embed_benchmark.py` **拆分**（坐标扫描、数据集、监控、单张/ v9 / 目录双卡流水线等）；**`wsi_embed_benchmark.py`** 保留为 **`from wsi_embed import *`** 的兼容入口，旧代码 `import wsi_embed_benchmark` 仍可用。
 
-## 上传到 GitHub
-
-1. 不要提交大文件：`weights/*.pt`、`weights/*.pth`、`runs/`、`hpc/gpu_monitor_batch50/` 等已在 `.gitignore`。
-2. `requirements.txt` 含完整 pip 冻结；若推送后他人安装失败，请根据其 CUDA 版本单独安装 `torch/torchvision` 后再分段安装依赖。
-
 ## 许可证
 
 原 GigaPath 与相关权重版权归各自所有者；本仓库内**自写脚本与说明**可按项目需要单独选择许可证（如 MIT）。若需对外发布，请确认上游模型与代码的许可条款。
