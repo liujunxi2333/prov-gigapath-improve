@@ -52,7 +52,7 @@
 - **Python 3.10+**（参考环境为 3.10）
 - **CUDA** 与 **PyTorch** 版本需匹配（见 `requirements.txt`；若本机 CUDA 不同，请从 [PyTorch 官网](https://pytorch.org/get-started/locally/) 安装对应 wheel）
 - **OpenSlide**：`openslide-python` + 系统级 libopenslide
-- **libvips**：`requirements.txt` 中的 **`pyvips`** 用于卵巢 PNG→TIFF 写出（`scripts/ov_processing_gpu.py` 等）；`pip install` 后仍需系统或 conda-forge 提供 **libvips**（见 `requirements.txt` 顶部注释）。
+- **libvips**：`requirements.txt` 中的 **`pyvips`** 用于 PNG→TIFF 写出（`scripts/ov_processing_gpu.py` 等）；`pip install` 后仍需系统或 conda-forge 提供 **libvips**（见 `requirements.txt` 顶部注释）。
 - **可选**：`pynvml` / `nvidia-ml-py`（用于 `--monitor`）
 
 ## 安装步骤
